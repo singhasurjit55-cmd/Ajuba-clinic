@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>APPOINTMENT AJUBA Pro | Dr. Surjit Singh</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    
+    .container {
+      background: white;
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      max-width: 450px;
+      width: 100%;
+      text-align: center;
+    }
+    
+    h1 {
+      color: #667eea;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    
+    .subtitle {
+      color: #666;
+      margin-bottom: 30px;
+      font-size: 14px;
+    }
+    
+    input {
+      width: 100%;
+      padding: 15px;
+      margin-bottom: 15px;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+    
+    input:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+    
+    button {
+      width: 100%;
+      padding: 16px;
+      background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: 0.3s;
+    }
+    
+    button:hover {
+      background: #5568d3;
+      transform: translateY(-2px);
+    }
+    
+    #loginBox {
+      display: block;
+    }
+    
+    #formBox {
+      display: none;
+    }
+    
+    .error {
+      color: red;
+      font-size: 14px;
+      margin-top: 10px;
+      min-height: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="loginBox">
+      <h1>🔐 AJUBA CLINIC</h1>
+      <p class="subtitle">Staff Login Required</p>
+      <input type="password" id="password" placeholder="Password daalein">
+      <button onclick="checkPassword()">Login Karein</button>
+      <p class="error" id="errorMsg"></p>
+    </div>
+    
+    <div id="formBox">
+      <h1>📅 AJUBA APPOINTMENT</h1>
+      <p class="subtitle">Patient Details Bharein</p>
+      <input type="text" id="name" placeholder="Patient ka Naam">
+      <input type="tel" id="mobile" placeholder="Mobile Number">
+      <input type="text" id="disease" placeholder="Bimari / Problem">
+      <input type="date" id="date">
+      <button onclick="sendWhatsApp()">WhatsApp Pe Bhejein</button>
+    </div>
+  </div>
+  
+  <script>
+    // PASSWORD YAHAN BADAL SAKTA HAI
+    const PASSWORD = "Ajuba@2026";
+    
+    // APNA WHATSAPP NUMBER YAHAN DAAL - 91 KE SAATH
+    const WHATSAPP_NUMBER = "9170XXXXXXX";
+    
+    function checkPassword() {
+      const pass = document.getElementById('password').value;
+      const errorMsg = document.getElementById('errorMsg');
+      
+      if (pass === PASSWORD) {
+        document.getElementById('loginBox').style.display = 'none';
+        document.getElementById('formBox').style.display = 'block';
+        errorMsg.innerText = '';
+      } else {
+        errorMsg.innerText = 'Galat Password! Dobara try karein.';
+      }
+    }
+    
+    function sendWhatsApp() {
+      const name = document.getElementById('name').value;
+      const mobile = document.getElementById('mobile').value;
+      const disease = document.getElementById('disease').value;
+      const date = document.getElementById('date').value;
+      
+      if (!name || !mobile || !disease || !date) {
+        alert('Kripya sabhi fields bharein!');
+        return;
+      }
+      
+      const message = `*AJUBA CLINIC APPOINTMENT*%0A%0A*Patient:* ${name}%0A*Mobile:* ${mobile}%0A*Bimari:* ${disease}%0A*Date:* ${date}%0A%0A_Dr. Surjit Singh_`;
+      
+      const whatsappURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+      window.open(whatsappURL, '_blank');
+   
